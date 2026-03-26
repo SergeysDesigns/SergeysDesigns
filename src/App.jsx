@@ -52,6 +52,12 @@ function Nav() {
         <img src="/logo.png" alt="Sergey's Designs" style={{
           height: "36px", width: "auto",
         }} />
+        <span style={{
+          fontFamily: "'DM Serif Display', serif",
+          fontSize: "20px", color: "var(--charcoal)", fontWeight: 400, paddingLeft: "5px",
+        }}>
+        Sergey's Designs
+        </span>
       </a>
       <div style={{ display: "flex", gap: "clamp(16px, 3vw, 32px)", alignItems: "center" }}>
         {[
