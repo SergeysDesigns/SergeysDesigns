@@ -45,3 +45,11 @@ img { max-width: 100%; display: block; }
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* Hide brand name on small screens so nav doesn't overlap */
+@media (max-width: 640px) {
+  .nav-brand-text { display: none; }
+  .nav-cta { font-size: 12px !important; padding: 7px 14px !important; white-space: nowrap; }
+  .nav-links { gap: 12px !important; }
+  .nav-link { font-size: 13px !important; }
+}
