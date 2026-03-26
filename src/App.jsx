@@ -47,14 +47,11 @@ function Nav() {
       transition: "all 0.3s ease",
     }}>
       <a href="#" style={{
-        textDecoration: "none", display: "flex", alignItems: "center", gap: "6px",
+        textDecoration: "none", display: "flex", alignItems: "center",
       }}>
-        <span style={{
-          fontFamily: "'DM Serif Display', serif",
-          fontSize: "24px", color: "var(--charcoal)", fontWeight: 400,
-        }}>
-          <span style={{ color: "var(--accent)" }}>S</span> Sergey's Designs
-        </span>
+        <img src="/logo.png" alt="Sergey's Designs" style={{
+          height: "36px", width: "auto",
+        }} />
       </a>
       <div style={{ display: "flex", gap: "clamp(16px, 3vw, 32px)", alignItems: "center" }}>
         {[
@@ -63,7 +60,7 @@ function Nav() {
           { label: "Contact", href: "#contact" },
         ].map((l) => (
           <a key={l.label} href={l.href} style={{
-            fontSize: "16px", color: "var(--gray-600)", textDecoration: "none",
+            fontSize: "14px", color: "var(--gray-600)", textDecoration: "none",
             transition: "color 0.2s",
           }}
             onMouseEnter={(e) => e.target.style.color = "var(--charcoal)"}
@@ -71,9 +68,9 @@ function Nav() {
           >{l.label}</a>
         ))}
         <a href="#contact" style={{
-          fontSize: "15px", fontWeight: 500, color: "white",
+          fontSize: "13px", fontWeight: 500, color: "white",
           background: "var(--accent)", borderRadius: "6px",
-          padding: "10px 22px", textDecoration: "none",
+          padding: "8px 18px", textDecoration: "none",
           transition: "background 0.2s",
         }}
           onMouseEnter={(e) => e.target.style.background = "var(--accent-hover)"}
@@ -86,7 +83,7 @@ function Nav() {
 
 
 // ═══════════════════════════════════════════
-// HERO
+// HERO — Equals-inspired
 // ═══════════════════════════════════════════
 function Hero() {
   return (
@@ -113,7 +110,7 @@ function Hero() {
             What comes after a Yelp page?
           </h1>
           <p style={{
-            fontSize: "clamp(18px, 2.2vw, 21px)",
+            fontSize: "clamp(16px, 2vw, 19px)",
             color: "var(--gray-600)", lineHeight: 1.6,
             maxWidth: "520px", margin: "0 auto 36px",
           }}>
@@ -121,18 +118,18 @@ function Hero() {
           </p>
           <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
             <a href="#work" style={{
-              fontSize: "16px", fontWeight: 500, color: "white",
+              fontSize: "14px", fontWeight: 500, color: "white",
               background: "var(--accent)", borderRadius: "8px",
-              padding: "14px 32px", textDecoration: "none",
+              padding: "12px 28px", textDecoration: "none",
               transition: "all 0.2s",
             }}
               onMouseEnter={(e) => { e.target.style.background = "var(--accent-hover)"; e.target.style.transform = "translateY(-1px)"; }}
               onMouseLeave={(e) => { e.target.style.background = "var(--accent)"; e.target.style.transform = "translateY(0)"; }}
             >See my work</a>
             <a href="#pricing" style={{
-              fontSize: "16px", fontWeight: 500, color: "var(--charcoal)",
+              fontSize: "14px", fontWeight: 500, color: "var(--charcoal)",
               background: "var(--white)", border: "1px solid var(--gray-200)",
-              borderRadius: "8px", padding: "14px 32px", textDecoration: "none",
+              borderRadius: "8px", padding: "12px 28px", textDecoration: "none",
               transition: "all 0.2s",
             }}
               onMouseEnter={(e) => e.target.style.borderColor = "var(--gray-400)"}
@@ -147,7 +144,7 @@ function Hero() {
 
 
 // ═══════════════════════════════════════════
-// INTEGRATIONS ROW
+// INTEGRATIONS ROW — like the logo bar in Equals
 // ═══════════════════════════════════════════
 function Integrations() {
   return (
@@ -169,7 +166,7 @@ function Integrations() {
           {content.integrations.map((item, i) => (
             <div key={i} style={{
               display: "flex", alignItems: "center", gap: "6px",
-              fontSize: "17px", fontWeight: 600, color: "var(--gray-900)",
+              fontSize: "15px", fontWeight: 600, color: "var(--gray-900)",
               transition: "opacity 0.2s", cursor: "default",
             }}
               onMouseEnter={(e) => e.currentTarget.style.opacity = "0.6"}
@@ -189,17 +186,58 @@ function Integrations() {
 }
 
 
+// ═══════════════════════════════════════════
+// FEATURES — Equals-style rows with color accent bars
+// ═══════════════════════════════════════════
+function Features() {
+  const items = [
+    { title: "For Dine-In Restaurants", desc: "A stunning online presence with your menu, hours, and ambiance — so customers choose you over the place next door.", color: "var(--accent)" },
+    { title: "For Takeout & Delivery", desc: "Integrated with DoorDash, Uber Eats, and Grubhub. One tap from your site to an order in your kitchen.", color: "var(--blue)" },
+    { title: "For Growing Businesses", desc: "SEO, Google Business Profile, and a site that actually ranks when someone searches 'restaurants near me.'", color: "var(--green)" },
+  ];
+
+  return (
+    <div style={{ padding: "clamp(40px, 8vw, 80px) clamp(24px, 5vw, 80px)", maxWidth: "800px", margin: "0 auto" }}>
+      {items.map((item, i) => (
+        <Fade key={i} delay={i * 0.1}>
+          <div style={{
+            display: "flex", justifyContent: "space-between", alignItems: "center",
+            padding: "32px 0",
+            borderBottom: i < items.length - 1 ? "1px solid var(--gray-100)" : "none",
+            gap: "24px",
+          }}>
+            <div>
+              <h3 style={{
+                fontFamily: "'DM Serif Display', serif",
+                fontSize: "clamp(22px, 3vw, 28px)",
+                fontWeight: 400, marginBottom: "6px",
+              }}>{item.title}</h3>
+              <p style={{ fontSize: "15px", color: "var(--gray-600)", lineHeight: 1.6 }}>
+                {item.desc}
+              </p>
+            </div>
+            <div style={{
+              width: "40px", height: "16px", borderRadius: "4px",
+              background: item.color, flexShrink: 0,
+            }} />
+          </div>
+        </Fade>
+      ))}
+    </div>
+  );
+}
+
 
 // ═══════════════════════════════════════════
-// WHAT YOU GET
+// WHAT YOU GET — grid
 // ═══════════════════════════════════════════
 function WhatYouGet() {
   const items = [
-    { title: "Custom Design", text: "Unique to your brand. No templates, no cookie-cutter layouts.", icon: "◆" },
+    { title: "Custom Design", text: "Unique to your brand — no templates, no cookie-cutter layouts.", icon: "◆" },
     { title: "Mobile-First", text: "85% of local searches happen on phones. Your site will be flawless.", icon: "◆" },
-    { title: "Online Menu", text: "Beautiful and easy to browse. No more PDF downloads.", icon: "◆" },
+    { title: "Online Menu", text: "Beautiful and browsable — no more PDF downloads.", icon: "◆" },
     { title: "Food Photography", text: "Your dishes front and center. The #1 thing that converts browsers to diners.", icon: "◆" },
-    { title: "Ordering Integration", text: "DoorDash, Uber Eats, Grubhub, and Toast, all connected directly to your site.", icon: "◆" },
+    { title: "Ordering Integration", text: "DoorDash, Uber Eats, Grubhub, Toast — connected directly to your site.", icon: "◆" },
     { title: "Google SEO", text: "Rank when people search 'restaurants near me' in your area.", icon: "◆" },
   ];
 
@@ -246,10 +284,10 @@ function WhatYouGet() {
                 fontSize: "10px", color: "var(--accent)", marginBottom: "12px",
               }}>{item.icon}</div>
               <h3 style={{
-                fontSize: "19px", fontWeight: 600, marginBottom: "8px",
+                fontSize: "17px", fontWeight: 600, marginBottom: "8px",
               }}>{item.title}</h3>
               <p style={{
-                fontSize: "16px", color: "var(--gray-600)", lineHeight: 1.6,
+                fontSize: "14px", color: "var(--gray-600)", lineHeight: 1.6,
               }}>{item.text}</p>
             </div>
           </Fade>
@@ -324,10 +362,10 @@ function Work() {
                   fontSize: "24px", fontWeight: 400, marginBottom: "8px",
                 }}>{p.name}</h3>
                 <p style={{
-                  fontSize: "16px", color: "var(--gray-600)", lineHeight: 1.6, marginBottom: "16px",
+                  fontSize: "14px", color: "var(--gray-600)", lineHeight: 1.6, marginBottom: "16px",
                 }}>{p.description}</p>
                 <span style={{
-                  fontSize: "15px", fontWeight: 500, color: "var(--accent)",
+                  fontSize: "13px", fontWeight: 500, color: "var(--accent)",
                 }}>View site →</span>
               </div>
             </a>
@@ -383,7 +421,7 @@ function Pricing() {
             <p style={{
               fontSize: "14px", color: "var(--gray-400)", marginBottom: "28px",
             }}>One-time payment</p>
-            <div style={{ fontSize: "16px", lineHeight: 2.2 }}>
+            <div style={{ fontSize: "14px", lineHeight: 2.2 }}>
               {content.setupFeatures.map((f, i) => (
                 <div key={i} style={{ color: "rgba(255,255,255,0.7)" }}>
                   <span style={{ color: "var(--green)", marginRight: "10px" }}>✓</span>{f}
@@ -403,11 +441,11 @@ function Pricing() {
             <div style={{
               position: "absolute", top: "-11px", left: "50%", transform: "translateX(-50%)",
               background: "var(--accent)", color: "white",
-              fontSize: "12px", fontWeight: 600, letterSpacing: "1px",
+              fontSize: "11px", fontWeight: 600, letterSpacing: "1px",
               textTransform: "uppercase", padding: "4px 14px", borderRadius: "4px",
             }}>Recommended</div>
             <p style={{
-              fontSize: "13px", color: "var(--gray-400)",
+              fontSize: "12px", color: "var(--gray-400)",
               textTransform: "uppercase", letterSpacing: "2px", marginBottom: "16px",
             }}>Monthly Maintenance</p>
             <div style={{
@@ -417,9 +455,9 @@ function Pricing() {
               ${content.monthlyPrice}<span style={{ fontSize: "18px", color: "var(--gray-400)" }}>/mo</span>
             </div>
             <p style={{
-              fontSize: "15px", color: "var(--gray-400)", marginBottom: "28px",
+              fontSize: "14px", color: "var(--gray-400)", marginBottom: "28px",
             }}>Optional · Cancel anytime</p>
-            <div style={{ fontSize: "16px", lineHeight: 2.2 }}>
+            <div style={{ fontSize: "14px", lineHeight: 2.2 }}>
               {content.maintenanceFeatures.map((f, i) => (
                 <div key={i} style={{ color: "rgba(255,255,255,0.7)" }}>
                   <span style={{ color: "var(--green)", marginRight: "10px" }}>✓</span>{f}
@@ -433,9 +471,9 @@ function Pricing() {
       <Fade>
         <p style={{
           textAlign: "center", marginTop: "32px",
-          fontSize: "16px", color: "var(--gray-400)", fontStyle: "italic",
+          fontSize: "14px", color: "var(--gray-400)", fontStyle: "italic",
         }}>
-          Your domain is always yours. If you cancel, everything transfers to you. No strings attached.
+          Your domain is always yours. If you cancel, everything transfers to you — no strings.
         </p>
       </Fade>
     </div>
@@ -448,7 +486,7 @@ function Pricing() {
 // ═══════════════════════════════════════════
 function WhyMaintenance() {
   const items = [
-    { title: "Menus change.", text: "New dishes, seasonal specials, price updates. Your site stays current without you lifting a finger." },
+    { title: "Menus change.", text: "New dishes, seasonal specials, price updates — your site stays current without you lifting a finger." },
     { title: "First impressions matter.", text: "Outdated hours or broken links cost you customers. I keep everything polished and working." },
     { title: "Google rewards fresh sites.", text: "Regular updates signal to Google that your business is active, helping you rank higher in local search." },
   ];
@@ -480,7 +518,7 @@ function WhyMaintenance() {
                 fontFamily: "'DM Serif Display', serif",
                 fontSize: "20px", fontWeight: 400, marginBottom: "8px",
               }}>{item.title}</h3>
-              <p style={{ fontSize: "16px", color: "var(--gray-600)", lineHeight: 1.7 }}>
+              <p style={{ fontSize: "14px", color: "var(--gray-600)", lineHeight: 1.7 }}>
                 {item.text}
               </p>
             </div>
@@ -493,7 +531,7 @@ function WhyMaintenance() {
 
 
 // ═══════════════════════════════════════════
-// CTA
+// CTA — Equals-style bottom CTA with tint
 // ═══════════════════════════════════════════
 function CTA() {
   return (
@@ -515,10 +553,10 @@ function CTA() {
             marginBottom: "16px",
           }}>Ready to get started?</h2>
           <p style={{
-            fontSize: "19px", color: "var(--gray-600)", lineHeight: 1.6,
+            fontSize: "17px", color: "var(--gray-600)", lineHeight: 1.6,
             maxWidth: "440px", margin: "0 auto 36px",
           }}>
-            No pressure, no pitch. Just a conversation about what your restaurant needs.
+            No pressure, no pitch — just a conversation about what your restaurant needs.
           </p>
           <div style={{
             display: "flex", flexDirection: "column",
@@ -544,7 +582,7 @@ function CTA() {
 
 
 // ═══════════════════════════════════════════
-// FOOTER
+// FOOTER — Equals-style with big brand mark
 // ═══════════════════════════════════════════
 function Footer() {
   return (
@@ -609,9 +647,10 @@ export default function App() {
       <Nav />
       <Hero />
       <Integrations />
+      <Features />
+      <WhatYouGet />
       <Work />
       <Pricing />
-      <WhatYouGet />
       <WhyMaintenance />
       <CTA />
       <Footer />
