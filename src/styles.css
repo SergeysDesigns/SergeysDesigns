@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+:root {
+  --white: #FFFFFF;
+  --off-white: #FAFAFA;
+  --bg-tint: #FBF9F7;
+  --charcoal: #1A1A1A;
+  --dark: #111111;
+  --gray-900: #2D2D2D;
+  --gray-600: #6B6B6B;
+  --gray-400: #9E9E9E;
+  --gray-200: #E5E5E5;
+  --gray-100: #F3F3F3;
+  --accent: #E8593F;
+  --accent-hover: #D44A32;
+  --blue: #3B5BDB;
+  --green: #12B886;
+  --purple: #BE4BDB;
+  --amber: #F59F00;
+  --pastel-pink: rgba(232,89,63,0.08);
+  --pastel-blue: rgba(59,91,219,0.08);
+  --pastel-green: rgba(18,184,134,0.08);
+  --pastel-purple: rgba(190,75,219,0.06);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  color: var(--charcoal);
+  background: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: white; }
+img { max-width: 100%; display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
