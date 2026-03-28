@@ -21,6 +21,13 @@ const siteContent = {
       url: "https://taqueria-los-lagos.sergeysdesigns.workers.dev",
       image: "https://images.unsplash.com/photo-1613514785940-daed07799d9b?w=800&q=80",
     },
+	{
+	  name: "Golden Crust Bakery",
+	  type: "Artisan Bakery & Cafe",
+	  description: "Split-layout bakery site with horizontal product carousel, menu cards, and DoorDash ordering integration.",
+	  url: "https://golden-crust-bakery.pages.dev",
+	  image: "https://images.pexels.com/photos/1775043/pexels-photo-1775043.jpeg?auto=compress&cs=tinysrgb&w=800",
+	},
   ],
 
   setupPrice: "500",
