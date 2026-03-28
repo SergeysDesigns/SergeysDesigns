@@ -18,7 +18,7 @@ const siteContent = {
       name: "Taqueria Los Lagos",
       type: "Mexican Restaurant",
       description: "Adobe-inspired design with full menu from their board, catering section, and DoorDash integration.",
-      url: "taqueria-los-lagos.sergeysdesigns.workers.dev",
+      url: "https://taqueria-los-lagos.sergeysdesigns.workers.dev",
       image: "https://images.unsplash.com/photo-1613514785940-daed07799d9b?w=800&q=80",
     },
   ],
