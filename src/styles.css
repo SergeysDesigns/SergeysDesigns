@@ -35,6 +35,8 @@ body {
 }
 
 ::selection { background: var(--accent); color: white; }
+
+#work .scroll-track::-webkit-scrollbar { display: none; }
 img { max-width: 100%; display: block; }
 
 @keyframes fadeUp {

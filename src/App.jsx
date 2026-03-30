@@ -325,10 +325,17 @@ function Work() {
         </div>
       </Fade>
 
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
-        gap: "24px", maxWidth: "900px", margin: "0 auto",
+      <div className="scroll-track" style={{
+        display: "flex",
+        overflowX: "auto",
+        gap: "24px",
+        paddingBottom: "16px",
+        scrollSnapType: "x mandatory",
+        WebkitOverflowScrolling: "touch",
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+        margin: "0 calc(-1 * clamp(24px, 5vw, 80px))",
+        padding: "0 clamp(24px, 5vw, 80px) 16px",
       }}>
         {content.projects.map((p, i) => (
           <Fade key={i} delay={i * 0.1}>
@@ -337,6 +344,8 @@ function Work() {
               borderRadius: "12px", overflow: "hidden",
               border: "1px solid var(--gray-100)",
               transition: "all 0.3s",
+              flex: "0 0 340px",
+              scrollSnapAlign: "start",
             }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "var(--gray-200)";
