@@ -325,27 +325,14 @@ function Work() {
         </div>
       </Fade>
 
-      <div className="scroll-track" style={{
-        display: "flex",
-        overflowX: "auto",
-        gap: "24px",
-        paddingBottom: "16px",
-        scrollSnapType: "x mandatory",
-        WebkitOverflowScrolling: "touch",
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
-        margin: "0 calc(-1 * clamp(24px, 5vw, 80px))",
-        padding: "0 clamp(24px, 5vw, 80px) 16px",
-      }}>
+      <div className="scroll-track">
         {content.projects.map((p, i) => (
           <Fade key={i} delay={i * 0.1}>
-            <a href={p.url} target="_blank" rel="noopener noreferrer" style={{
+            <a href={p.url} target="_blank" rel="noopener noreferrer" className="project-card" style={{
               display: "block", textDecoration: "none", color: "inherit",
               borderRadius: "12px", overflow: "hidden",
               border: "1px solid var(--gray-100)",
               transition: "all 0.3s",
-              flex: "0 0 340px",
-              scrollSnapAlign: "start",
             }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "var(--gray-200)";
