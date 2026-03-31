@@ -63,7 +63,6 @@ function Nav() {
         {[
           { label: "Work", href: "#work" },
           { label: "Pricing", href: "#pricing" },
-          { label: "Contact", href: "#contact" },
         ].map((l) => (
           <a key={l.label} href={l.href} className="nav-link" style={{
             fontSize: "14px", color: "var(--gray-600)", textDecoration: "none",
