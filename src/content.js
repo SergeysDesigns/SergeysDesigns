@@ -50,6 +50,24 @@ const siteContent = {
     "Priority response within 24 hours",
   ],
 
+  testimonials: [
+    {
+      name: "Maria Nguyen",
+      role: "Owner, Saigon Kitchen",
+      text: "Sergey took our outdated Yelp presence and turned it into a real website that customers actually find. We've seen a noticeable bump in online orders since launch.",
+    },
+    {
+      name: "Carlos Ramirez",
+      role: "Owner, Taqueria Los Lagos",
+      text: "He understood exactly what we needed. The DoorDash integration alone has paid for the site ten times over. Highly recommend.",
+    },
+    {
+      name: "Elena Petrov",
+      role: "Owner, Golden Crust Bakery",
+      text: "Professional, fast, and actually listens. Our site looks like it belongs to a much bigger operation. Customers tell us all the time how great it looks.",
+    },
+  ],
+
   integrations: [
     { name: "DoorDash", color: "#FF3008" },
     { name: "Uber Eats", color: "#06C167" },

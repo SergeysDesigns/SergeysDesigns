@@ -27,6 +27,36 @@ function Fade({ children, delay = 0, style = {} }) {
 
 
 // ═══════════════════════════════════════════
+// SCROLL PROGRESS
+// ═══════════════════════════════════════════
+function ScrollProgress() {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const fn = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(docHeight > 0 ? scrollTop / docHeight : 0);
+    };
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
+
+  return (
+    <div style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 1001,
+      height: "3px", background: "transparent",
+    }}>
+      <div style={{
+        height: "100%", width: `${progress * 100}%`,
+        background: "var(--accent)",
+        transition: "width 0.05s linear",
+      }} />
+    </div>
+  );
+}
+
+
+// ═══════════════════════════════════════════
 // NAV
 // ═══════════════════════════════════════════
 function Nav() {
@@ -319,7 +349,7 @@ function Work() {
               }}
             >
               <div style={{ height: "260px", overflow: "hidden", background: "var(--gray-100)" }}>
-                <img src={p.image} alt={p.name} style={{
+                <img src={p.image} alt={p.name} loading="lazy" style={{
                   width: "100%", height: "100%", objectFit: "cover",
                   transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1)",
                 }}
@@ -347,6 +377,77 @@ function Work() {
                 }}>View site &rarr;</span>
               </div>
             </a>
+          </Fade>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
+// ═══════════════════════════════════════════
+// TESTIMONIALS
+// ═══════════════════════════════════════════
+function Testimonials() {
+  return (
+    <div style={{
+      background: "var(--bg-tint)",
+      padding: "clamp(64px, 10vw, 110px) clamp(24px, 5vw, 80px)",
+    }}>
+      <Fade>
+        <div style={{ textAlign: "center", marginBottom: "56px" }}>
+          <p style={{
+            fontSize: "12px", color: "var(--gray-400)",
+            textTransform: "uppercase", letterSpacing: "2.5px", marginBottom: "14px",
+            fontWeight: 500,
+          }}>What clients say</p>
+          <h2 style={{
+            fontFamily: "'Bodoni Moda', serif",
+            fontSize: "clamp(30px, 4.5vw, 44px)", fontWeight: 400,
+            letterSpacing: "-0.01em",
+          }}>Trusted by restaurant owners.</h2>
+        </div>
+      </Fade>
+
+      <div className="testimonial-track">
+        {content.testimonials.map((t, i) => (
+          <Fade key={i} delay={i * 0.08} style={{ height: "100%" }}>
+            <div className="testimonial-card" style={{
+              background: "var(--white)", borderRadius: "10px",
+              padding: "32px 28px", border: "1px solid var(--gray-100)",
+              height: "100%", display: "flex", flexDirection: "column",
+              transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
+              cursor: "default",
+            }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "var(--gray-200)";
+                e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.04)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--gray-100)";
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              <div style={{
+                fontSize: "28px", color: "var(--accent)", marginBottom: "16px",
+                fontFamily: "'Bodoni Moda', serif", lineHeight: 1, userSelect: "none",
+              }}>&ldquo;</div>
+              <p style={{
+                fontSize: "15px", color: "var(--gray-600)", lineHeight: 1.7,
+                fontWeight: 300, flex: 1, marginBottom: "24px",
+              }}>{t.text}</p>
+              <div>
+                <p style={{
+                  fontSize: "15px", fontWeight: 600, color: "var(--charcoal)",
+                  marginBottom: "2px",
+                }}>{t.name}</p>
+                <p style={{
+                  fontSize: "13px", color: "var(--gray-400)", fontWeight: 400,
+                }}>{t.role}</p>
+              </div>
+            </div>
           </Fade>
         ))}
       </div>
@@ -521,50 +622,174 @@ function WhyMaintenance() {
 
 
 // ═══════════════════════════════════════════
-// CTA
+// CTA / CONTACT FORM
 // ═══════════════════════════════════════════
 function CTA() {
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("sending");
+    const form = e.target;
+    try {
+      const res = await fetch("https://formspree.io/f/mjgpeorl", {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  const inputStyle = {
+    width: "100%", padding: "14px 16px",
+    fontSize: "15px", fontFamily: "'Jost', sans-serif",
+    fontWeight: 300, color: "var(--charcoal)",
+    background: "var(--white)", border: "1.5px solid var(--gray-200)",
+    borderRadius: "8px", outline: "none",
+    transition: "border-color 0.2s",
+  };
+
   return (
     <div id="contact" style={{
       background: "var(--bg-tint)",
       padding: "clamp(72px, 12vw, 120px) clamp(24px, 5vw, 80px)",
-      textAlign: "center",
     }}>
       <Fade>
-        <div>
-          <p style={{
-            fontSize: "12px", color: "var(--gray-400)",
-            textTransform: "uppercase", letterSpacing: "2.5px", marginBottom: "14px",
-            fontWeight: 500,
-          }}>Let's talk</p>
-          <h2 style={{
-            fontFamily: "'Bodoni Moda', serif",
-            fontSize: "clamp(30px, 5vw, 48px)", fontWeight: 400,
-            marginBottom: "18px", letterSpacing: "-0.01em",
-          }}>Ready to get started?</h2>
-          <p style={{
-            fontSize: "18px", color: "var(--gray-600)", lineHeight: 1.7,
-            maxWidth: "440px", margin: "0 auto 40px",
-            fontWeight: 300,
-          }}>
-            No pressure, no pitch. Just a conversation about what your restaurant needs.
-          </p>
+        <div style={{ maxWidth: "520px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "40px" }}>
+            <p style={{
+              fontSize: "12px", color: "var(--gray-400)",
+              textTransform: "uppercase", letterSpacing: "2.5px", marginBottom: "14px",
+              fontWeight: 500,
+            }}>Let's talk</p>
+            <h2 style={{
+              fontFamily: "'Bodoni Moda', serif",
+              fontSize: "clamp(30px, 5vw, 48px)", fontWeight: 400,
+              marginBottom: "18px", letterSpacing: "-0.01em",
+            }}>Ready to get started?</h2>
+            <p style={{
+              fontSize: "18px", color: "var(--gray-600)", lineHeight: 1.7,
+              fontWeight: 300,
+            }}>
+              No pressure, no pitch. Just a conversation about what your restaurant needs.
+            </p>
+          </div>
+
+          {status === "success" ? (
+            <div style={{
+              textAlign: "center", padding: "48px 24px",
+              background: "var(--white)", borderRadius: "10px",
+              border: "1px solid var(--gray-100)",
+            }}>
+              <div style={{ fontSize: "32px", marginBottom: "16px", color: "var(--green)" }}>&#10003;</div>
+              <p style={{
+                fontFamily: "'Bodoni Moda', serif",
+                fontSize: "24px", fontWeight: 400, marginBottom: "8px",
+              }}>Message sent!</p>
+              <p style={{
+                fontSize: "15px", color: "var(--gray-600)", fontWeight: 300,
+              }}>I'll get back to you within 24 hours.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+              {/* Honeypot for spam */}
+              <input type="text" name="_gotcha" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+
+              <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+                <div style={{ flex: "1 1 200px" }}>
+                  <label htmlFor="name" style={{
+                    fontSize: "13px", fontWeight: 500, color: "var(--gray-600)",
+                    display: "block", marginBottom: "6px",
+                  }}>Name</label>
+                  <input
+                    id="name" name="name" type="text" required
+                    placeholder="Your name"
+                    style={inputStyle}
+                    onFocus={(e) => e.target.style.borderColor = "var(--accent)"}
+                    onBlur={(e) => e.target.style.borderColor = "var(--gray-200)"}
+                  />
+                </div>
+                <div style={{ flex: "1 1 200px" }}>
+                  <label htmlFor="contact" style={{
+                    fontSize: "13px", fontWeight: 500, color: "var(--gray-600)",
+                    display: "block", marginBottom: "6px",
+                  }}>Email or Phone</label>
+                  <input
+                    id="contact" name="contact" type="text" required
+                    placeholder="you@example.com or (555) 123-4567"
+                    style={inputStyle}
+                    onFocus={(e) => e.target.style.borderColor = "var(--accent)"}
+                    onBlur={(e) => e.target.style.borderColor = "var(--gray-200)"}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="message" style={{
+                  fontSize: "13px", fontWeight: 500, color: "var(--gray-600)",
+                  display: "block", marginBottom: "6px",
+                }}>Message</label>
+                <textarea
+                  id="message" name="message" required rows={5}
+                  placeholder="Tell me about your restaurant..."
+                  style={{ ...inputStyle, resize: "vertical", minHeight: "120px" }}
+                  onFocus={(e) => e.target.style.borderColor = "var(--accent)"}
+                  onBlur={(e) => e.target.style.borderColor = "var(--gray-200)"}
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                style={{
+                  fontSize: "15px", fontWeight: 500, color: "white",
+                  background: status === "sending" ? "var(--gray-400)" : "var(--accent)",
+                  border: "none", borderRadius: "8px",
+                  padding: "14px 36px", cursor: status === "sending" ? "not-allowed" : "pointer",
+                  fontFamily: "'Jost', sans-serif",
+                  transition: "all 0.25s",
+                  alignSelf: "flex-start",
+                }}
+                onMouseEnter={(e) => { if (status !== "sending") { e.target.style.background = "var(--accent-hover)"; e.target.style.transform = "translateY(-1px)"; } }}
+                onMouseLeave={(e) => { if (status !== "sending") { e.target.style.background = "var(--accent)"; e.target.style.transform = "translateY(0)"; } }}
+              >
+                {status === "sending" ? "Sending..." : "Send message"}
+              </button>
+
+              {status === "error" && (
+                <p style={{ fontSize: "14px", color: "#DC2626", fontWeight: 400 }}>
+                  Something went wrong. Please try again or email me directly.
+                </p>
+              )}
+            </form>
+          )}
+
           <div style={{
-            display: "flex", flexDirection: "column",
-            gap: "10px", alignItems: "center",
+            display: "flex", justifyContent: "center", gap: "24px",
+            marginTop: "36px", flexWrap: "wrap",
           }}>
             <a href={`mailto:${content.email}`} style={{
-              fontSize: "16px", fontWeight: 500, color: "var(--accent)",
-              textDecoration: "none", letterSpacing: "0.01em",
-              transition: "opacity 0.2s",
+              fontSize: "14px", fontWeight: 400, color: "var(--gray-400)",
+              textDecoration: "none", transition: "color 0.2s",
             }}
-              onMouseEnter={(e) => e.target.style.opacity = "0.7"}
-              onMouseLeave={(e) => e.target.style.opacity = "1"}
+              onMouseEnter={(e) => e.target.style.color = "var(--accent)"}
+              onMouseLeave={(e) => e.target.style.color = "var(--gray-400)"}
             >{content.email}</a>
             <a href={`tel:${content.phone.replace(/\D/g, '')}`} style={{
-              fontSize: "16px", fontWeight: 400, color: "var(--charcoal)",
-              textDecoration: "none",
-            }}>{content.phone}</a>
+              fontSize: "14px", fontWeight: 400, color: "var(--gray-400)",
+              textDecoration: "none", transition: "color 0.2s",
+            }}
+              onMouseEnter={(e) => e.target.style.color = "var(--charcoal)"}
+              onMouseLeave={(e) => e.target.style.color = "var(--gray-400)"}
+            >{content.phone}</a>
           </div>
         </div>
       </Fade>
@@ -685,12 +910,14 @@ function BackgroundBlobs() {
 export default function App() {
   return (
     <div style={{ position: "relative" }}>
+      <ScrollProgress />
       <BackgroundBlobs />
       <div style={{ position: "relative", zIndex: 1 }}>
         <Nav />
         <Hero />
         <Integrations />
         <Work />
+        <Testimonials />
         <Pricing />
         <WhatYouGet />
         <WhyMaintenance />
