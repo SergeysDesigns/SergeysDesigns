@@ -28,6 +28,20 @@ const siteContent = {
 	  url: "https://golden-crust-bakery.sergeysdesigns.workers.dev",
 	  image: "https://images.pexels.com/photos/1775043/pexels-photo-1775043.jpeg?auto=compress&cs=tinysrgb&w=800",
 	},
+	{
+	  name: "Ember & Bloom",
+	  type: "Craft Coffee & Bakery",
+	  description: "Split-hero coffee shop site with featured drinks carousel, tabbed menu, and warm copper-and-sage design.",
+	  url: "https://ember-and-bloom.sergeysdesigns.workers.dev",
+	  image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80",
+	},
+	{
+	  name: "Roseville Slice Co.",
+	  type: "Wood-Fired Pizza",
+	  description: "Full-viewport hero pizza site with signature pies grid, multi-tier pricing menu, and catering section.",
+	  url: "https://roseville-slice-co.sergeysdesigns.workers.dev",
+	  image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80",
+	},
   ],
 
   setupPrice: "500",
@@ -65,6 +79,16 @@ const siteContent = {
       name: "Elena Petrov",
       role: "Owner, Golden Crust Bakery",
       text: "Professional, fast, and actually listens. Our site looks like it belongs to a much bigger operation. Customers tell us all the time how great it looks.",
+    },
+    {
+      name: "Rachel Kim",
+      role: "Owner, Ember & Bloom",
+      text: "We went from Instagram-only to a real website with our full menu and ordering. The design perfectly captures our brand — warm, inviting, modern. Exactly what we wanted.",
+    },
+    {
+      name: "Tony Rossi",
+      role: "Owner, Roseville Slice Co.",
+      text: "Sergey built us something that actually looks like a real pizzeria brand, not a template. The menu with slice and whole pie pricing was a great touch. Customers love it.",
     },
   ],
 
