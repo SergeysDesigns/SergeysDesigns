@@ -144,7 +144,7 @@ function Hero() {
             maxWidth: "800px", margin: "0 auto 28px",
             letterSpacing: "-0.02em",
           }}>
-            What comes after<br />a Yelp page?
+            {content.tagline}
           </h1>
           <p style={{
             fontSize: "clamp(17px, 2vw, 20px)",
