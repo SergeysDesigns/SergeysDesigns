@@ -44,7 +44,7 @@ const siteContent = {
 	},
   ],
 
-  setupPrice: "500",
+  setupPrice: "300",
   monthlyPrice: "50",
 
   setupFeatures: [
