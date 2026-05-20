@@ -1,6 +1,6 @@
 const siteContent = {
   name: "Sergey's Designs",
-  tagline: "Custom websites for restaurants that actually bring in customers.",
+  tagline: "Custom websites that turn a search into a purchase.",
   subtitle: "Beautiful, fast, mobile-friendly sites with online ordering so your customers find you before they find your competitor.",
   location: "Roseville, CA",
   email: "sergeysdesigns@gmail.com",        // ✏️ Replace
